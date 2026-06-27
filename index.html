@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Korea Third-Place Watch + Round of 32 Dashboard</title>
+<style>
+  :root{
+    --bg:#0f172a; --panel:#111827; --panel2:#1f2937; --text:#e5e7eb; --muted:#94a3b8; --line:#334155;
+    --green:#16a34a; --green2:#052e16; --red:#dc2626; --red2:#450a0a; --amber:#f59e0b; --amber2:#451a03;
+    --blue:#38bdf8; --blue2:#082f49; --purple:#a78bfa; --purple2:#2e1065;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#020617 0%,#0f172a 100%);color:var(--text)}
+  header{padding:24px 28px 14px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;background:rgba(2,6,23,.92);backdrop-filter:blur(10px)}
+  h1{margin:0 0 6px;font-size:28px;letter-spacing:-.02em}.sub{color:var(--muted);font-size:13px;line-height:1.5}
+  .wrap{max-width:1360px;margin:0 auto;padding:22px 22px 60px}.cards{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:14px;margin:0 0 18px}
+  .card{background:linear-gradient(180deg,#111827,#0b1220);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+  .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}.value{font-size:28px;font-weight:800;letter-spacing:-.03em}.small{font-size:13px;color:var(--muted);line-height:1.45;margin-top:8px}
+  .status-good{color:#86efac}.status-bad{color:#fca5a5}.status-watch{color:#fde68a}
+  .grid{display:grid;grid-template-columns:1.25fr .9fr;gap:18px;align-items:start}.panel{background:rgba(15,23,42,.78);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.18);margin-bottom:18px}
+  .panel h2{margin:0;font-size:17px;padding:16px 18px;background:#111827;border-bottom:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px 10px;border-bottom:1px solid rgba(51,65,85,.7);text-align:left;vertical-align:middle}th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:#0b1220}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.top8{background:rgba(22,163,74,.10)}tr.out{background:rgba(220,38,38,.08)}tr.korea{outline:2px solid var(--blue);outline-offset:-2px;background:rgba(56,189,248,.16)!important}tr.cutline td{border-bottom:3px solid var(--amber)}tr.koreaFixture{outline:2px solid var(--blue);outline-offset:-2px;background:rgba(56,189,248,.14)!important}
+  .badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:700;border:1px solid transparent;white-space:nowrap}.b-good{background:var(--green2);color:#86efac;border-color:rgba(22,163,74,.4)}.b-bad{background:var(--red2);color:#fca5a5;border-color:rgba(220,38,38,.45)}.b-watch{background:var(--amber2);color:#fde68a;border-color:rgba(245,158,11,.45)}.b-blue{background:var(--blue2);color:#7dd3fc;border-color:rgba(56,189,248,.45)}.b-purple{background:var(--purple2);color:#c4b5fd;border-color:rgba(167,139,250,.45)}
+  .matchGrid,.pathCards{display:grid;grid-template-columns:1fr;gap:12px;padding:14px}.match,.path{border:1px solid var(--line);background:#0b1220;border-radius:14px;padding:12px}.matchTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}.matchTitle{font-weight:800;font-size:14px}.matchMeta{font-size:12px;color:var(--muted)}.scoreLine{display:grid;grid-template-columns:1fr 80px 80px 1fr;gap:8px;align-items:center}.team{text-align:center;font-size:13px}
+  input[type=number]{width:100%;background:#020617;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:16px;font-weight:800;text-align:center}button{background:#0ea5e9;color:white;border:none;border-radius:10px;padding:10px 12px;font-weight:800;cursor:pointer}button.secondary{background:#334155}.actions{display:flex;gap:10px;padding:0 14px 14px}.path h3{margin:0 0 7px;font-size:14px}.path p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}.mini{font-size:12px;color:var(--muted)} details.contextDetails{margin:0 14px 14px;border:1px solid var(--line);border-radius:14px;background:#0b1220} details.contextDetails summary{cursor:pointer;padding:12px 14px;font-weight:800;color:var(--muted)} details.contextDetails .match{margin:0 12px 12px}
+  .sources{color:var(--muted);font-size:12px;line-height:1.55;padding:14px 18px 18px;border-top:1px solid var(--line)}.sectionTitle{margin:24px 0 10px;font-size:20px}.fixture{font-weight:800}.fixture .vs{color:var(--muted);font-weight:600;margin:0 6px}.muted{color:var(--muted)}
+  .r16{font-size:12px;color:var(--muted)}
+  .bracketWrap{overflow-x:auto;padding:14px 14px 4px}
+  .bracketGrid{display:grid;grid-template-columns:repeat(2,minmax(390px,1fr));gap:14px;min-width:820px}
+  .bracketRegion{border:1px solid var(--line);border-radius:16px;background:#0b1220;padding:12px}
+  .bracketRegion h3{margin:0 0 10px;font-size:14px;color:#e5e7eb}
+  .r16Lane{display:grid;grid-template-columns:1fr 28px .82fr;gap:10px;align-items:center;margin:10px 0}
+  .r32Stack{display:grid;gap:8px}
+  .bracketMatch,.r16Box,.qfBox{border:1px solid rgba(51,65,85,.9);border-radius:13px;background:#020617;padding:10px}
+  .bracketMatch.koreaBox,.r16Box.koreaPath,.qfBox.koreaPath{outline:2px solid var(--blue);outline-offset:-2px;background:rgba(56,189,248,.12)}
+  .bracketMeta,.bracketVenue,.bracketSmall{font-size:11px;color:var(--muted);line-height:1.35}
+  .bracketFixture{font-size:13px;line-height:1.35;margin:4px 0}
+  .connector{color:var(--muted);font-weight:900;text-align:center}
+  .r16Box strong,.qfBox strong{font-size:13px;display:block;margin-top:4px}
+  .qfBox{margin-top:12px;background:rgba(167,139,250,.08)}
+
+  @media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+  @media(max-width:700px){.cards{grid-template-columns:1fr}header{position:relative}.scoreLine{grid-template-columns:1fr 58px 58px 1fr}.r32Table th:nth-child(4),.r32Table td:nth-child(4){display:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Korea Third-Place Watch + Round of 32 Dashboard</h1>
+  <div class="sub">Manual live mode: enter only the three bubble-relevant scores. Optional context scores are hidden below for full bracket precision, but they are not needed for Korea cut-line tracking.</div>
+</header>
+<div class="wrap">
+  <div class="cards">
+    <div class="card"><div class="label">Korea status</div><div class="value" id="koreaStatus">—</div><div class="small" id="koreaDetail">—</div></div>
+    <div class="card"><div class="label">Current cut-off</div><div class="value" id="cutoffValue">—</div><div class="small" id="cutoffDetail">—</div></div>
+    <div class="card"><div class="label">Korea R32 matchup</div><div class="value" style="font-size:20px" id="koreaR32">—</div><div class="small" id="koreaR32Detail">—</div></div>
+    <div class="card"><div class="label">Last updated</div><div class="value" style="font-size:20px" id="lastUpdated">—</div><div class="small">Scores persist in this browser.</div></div>
+  </div>
+
+  <div class="grid">
+    <section>
+      <div class="panel">
+        <h2>Third-place table — top 8 advance</h2>
+        <table id="thirdTable"><thead><tr><th class="num">Rank</th><th>Group</th><th>Team</th><th class="num">Pts</th><th class="num">GD</th><th class="num">GF</th><th class="num">GA</th><th>Status</th></tr></thead><tbody></tbody></table>
+        <div class="sources">Fixed before remaining Groups J/K/L: Sweden, Bosnia-Herzegovina, Ecuador, Paraguay and Senegal are treated as qualified; Uruguay is treated as eliminated. The visible inputs are limited to the three remaining matches that can move the third-place cut line for Korea.</div>
+      </div>
+
+      <div class="panel">
+        <h2>Bubble watch — countries in the same boat</h2>
+        <table id="bubbleTable"><thead><tr><th class="num">Rank</th><th>Group</th><th>Team</th><th class="num">Pts</th><th class="num">GD</th><th class="num">GF</th><th>Status</th><th>What they need / read-through</th></tr></thead><tbody></tbody></table>
+        <div class="sources">This table focuses on third-place teams that are still waiting, currently below the line, or could still move the cut line. It updates with the same score inputs as the main table.</div>
+      </div>
+
+      <div class="panel">
+        <h2>Round of 32 bracket + matchup tracker</h2>
+        <div id="bracketView" class="bracketWrap"></div>
+        <table id="r32Table" class="r32Table"><thead><tr><th class="num">Match</th><th>Time ICT</th><th>Fixture</th><th>Venue</th><th>Next path</th></tr></thead><tbody></tbody></table>
+        <div class="sources" id="thirdComboNote">—</div>
+      </div>
+    </section>
+
+    <aside>
+      <section class="panel">
+        <h2>Enter remaining scores</h2>
+        <div class="matchGrid" id="matches"></div>
+        <div class="actions"><button onclick="saveAndRecalc()">Recalculate</button><button class="secondary" onclick="resetScores()">Reset scores</button></div>
+      </section>
+      <section class="panel">
+        <h2>Korea path checker</h2>
+        <div class="pathCards" id="pathCards"></div>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script>
+const baseThird = [
+  {group:'A', team:'South Korea', pts:3, gf:2, ga:3, gd:-1, conduct:-4, fifa:25, fixed:true, note:'Waiting'},
+  {group:'B', team:'Bosnia-Herzegovina', pts:4, gf:5, ga:6, gd:-1, conduct:-10, fifa:64, fixed:true, note:'Qualified'},
+  {group:'C', team:'Scotland', pts:3, gf:1, ga:4, gd:-3, conduct:-5, fifa:42, fixed:true, note:'Waiting'},
+  {group:'D', team:'Paraguay', pts:4, gf:2, ga:4, gd:-2, conduct:-12, fifa:22, fixed:true, note:'Qualified'},
+  {group:'E', team:'Ecuador', pts:4, gf:2, ga:2, gd:0, conduct:-5, fifa:23, fixed:true, note:'Qualified'},
+  {group:'F', team:'Sweden', pts:4, gf:7, ga:7, gd:0, conduct:-5, fifa:8, fixed:true, note:'Qualified'},
+  {group:'G', team:'Iran', pts:3, gf:3, ga:3, gd:0, conduct:0, fifa:20, fixed:true, note:'Waiting'},
+  {group:'H', team:'Uruguay', pts:2, gf:3, ga:4, gd:-1, conduct:-3, fifa:16, fixed:true, note:'Eliminated'},
+  {group:'I', team:'Senegal', pts:3, gf:8, ga:6, gd:2, conduct:0, fifa:15, fixed:true, note:'Qualified'}
+];
+
+const groups = {
+  J: {teams:[{team:'Argentina',fifa:1,conduct:0},{team:'Austria',fifa:22,conduct:0},{team:'Algeria',fifa:63,conduct:0},{team:'Jordan',fifa:68,conduct:0}],played:[['Argentina','Algeria',3,0],['Austria','Jordan',3,1],['Argentina','Austria',2,0],['Algeria','Jordan',2,1]],remaining:[{id:'J1',group:'J',home:'Algeria',away:'Austria',time:'9:00 AM ICT',important:true,koreaNeed:'Austria win; backup: Algeria by 2+'},{id:'J2',group:'J',home:'Jordan',away:'Argentina',time:'9:00 AM ICT',important:false,koreaNeed:'Mostly irrelevant unless extreme score'}]},
+  K: {teams:[{team:'Colombia',fifa:12,conduct:0},{team:'Portugal',fifa:5,conduct:0},{team:'DR Congo',fifa:46,conduct:0},{team:'Uzbekistan',fifa:58,conduct:0}],played:[['Portugal','DR Congo',1,1],['Colombia','Uzbekistan',3,1],['Portugal','Uzbekistan',5,0],['Colombia','DR Congo',1,0]],remaining:[{id:'K1',group:'K',home:'Colombia',away:'Portugal',time:'6:30 AM ICT',important:false,koreaNeed:'Mostly irrelevant for Korea'},{id:'K2',group:'K',home:'DR Congo',away:'Uzbekistan',time:'6:30 AM ICT',important:true,koreaNeed:'DR Congo draw/lose'}]},
+  L: {teams:[{team:'England',fifa:4,conduct:0},{team:'Ghana',fifa:61,conduct:0},{team:'Croatia',fifa:11,conduct:-1},{team:'Panama',fifa:36,conduct:0}],played:[['England','Croatia',4,2],['Ghana','Panama',1,0],['England','Ghana',0,0],['Croatia','Panama',1,0]],remaining:[{id:'L1',group:'L',home:'Panama',away:'England',time:'4:00 AM ICT',important:false,koreaNeed:'Mostly irrelevant for Korea'},{id:'L2',group:'L',home:'Croatia',away:'Ghana',time:'4:00 AM ICT',important:true,koreaNeed:'Ghana win'}]}
+};
+
+const fixedGroupPositions = {
+  A:{winner:'Mexico',runner:'South Africa'}, B:{winner:'Switzerland',runner:'Canada'}, C:{winner:'Brazil',runner:'Morocco'}, D:{winner:'United States',runner:'Australia'}, E:{winner:'Germany',runner:'Ivory Coast'}, F:{winner:'Netherlands',runner:'Japan'}, G:{winner:'Belgium',runner:'Egypt'}, H:{winner:'Spain',runner:'Cabo Verde'}, I:{winner:'France',runner:'Norway'}
+};
+const slotOrder = ['1A','1B','1D','1E','1G','1I','1K','1L'];
+const allocationRows = {
+  BDEFIJKL:['3E','3J','3B','3D','3I','3F','3L','3K'],
+  BDEFGIKL:['3E','3G','3B','3D','3I','3F','3L','3K'],
+  BDEFGIJL:['3E','3G','3B','3D','3J','3F','3L','3I'],
+  BDEFGIJK:['3E','3G','3B','3D','3J','3F','3I','3K'],
+  ABDEFIKL:['3E','3I','3B','3D','3A','3F','3L','3K'],
+  ABDEFIJL:['3E','3J','3B','3D','3A','3F','3L','3I'],
+  ABDEFIJK:['3E','3J','3B','3D','3A','3F','3I','3K'],
+  ABDEFGIL:['3E','3G','3B','3D','3A','3F','3L','3I'],
+  ABDEFGIK:['3E','3G','3B','3D','3A','3F','3I','3K'],
+  ABDEFGIJ:['3E','3G','3B','3D','3A','3F','3I','3J'],
+  ABCDEFIL:['3C','3E','3B','3D','3A','3F','3L','3I'],
+  ABCDEFIK:['3C','3E','3B','3D','3A','3F','3I','3K'],
+  ABCDEFIJ:['3C','3J','3B','3D','3A','3F','3E','3I'],
+  ABCDEFGI:['3C','3G','3B','3D','3A','3F','3E','3I']
+};
+const r16Map = {73:'Winner M73 vs Winner M75',74:'Winner M74 vs Winner M77',75:'Winner M73 vs Winner M75',76:'Winner M76 vs Winner M78',77:'Winner M74 vs Winner M77',78:'Winner M76 vs Winner M78',79:'Winner M79 vs Winner M80',80:'Winner M79 vs Winner M80',81:'Winner M81 vs Winner M82',82:'Winner M81 vs Winner M82',83:'Winner M83 vs Winner M84',84:'Winner M83 vs Winner M84',85:'Winner M85 vs Winner M87',86:'Winner M86 vs Winner M88',87:'Winner M85 vs Winner M87',88:'Winner M86 vs Winner M88'};
+
+function getSaved(){try{return JSON.parse(localStorage.getItem('koreaDashboardScores_v2')||'{}')}catch(e){return {}}}
+let scores = getSaved();
+function statShell(t){return {team:t.team,pts:0,gf:0,ga:0,gd:0,w:0,d:0,l:0,fifa:t.fifa??999,conduct:t.conduct??0}}
+function addMatch(stats,h,a,hg,ag){const H=stats[h],A=stats[a];H.gf+=hg;H.ga+=ag;A.gf+=ag;A.ga+=hg;if(hg>ag){H.pts+=3;H.w++;A.l++}else if(hg<ag){A.pts+=3;A.w++;H.l++}else{H.pts++;A.pts++;H.d++;A.d++}}
+function buildMatches(g){const out=[...g.played];for(const m of g.remaining){const s=scores[m.id];if(s&&Number.isInteger(s.hg)&&Number.isInteger(s.ag))out.push([m.home,m.away,s.hg,s.ag])}return out}
+function rankGroup(key){const g=groups[key],stats={};g.teams.forEach(t=>stats[t.team]=statShell(t));const matches=buildMatches(g);matches.forEach(([h,a,hg,ag])=>addMatch(stats,h,a,hg,ag));Object.values(stats).forEach(t=>{t.gd=t.gf-t.ga;t.group=key});const byPts={};Object.values(stats).forEach(t=>(byPts[t.pts] ||= []).push(t));const ranked=[];for(const pts of Object.keys(byPts).map(Number).sort((a,b)=>b-a)){const tied=byPts[pts];if(tied.length===1){ranked.push(tied[0]);continue}const names=new Set(tied.map(t=>t.team));const h2h={};tied.forEach(t=>h2h[t.team]={team:t.team,pts:0,gf:0,ga:0,gd:0});for(const [h,a,hg,ag] of matches){if(names.has(h)&&names.has(a)){h2h[h].gf+=hg;h2h[h].ga+=ag;h2h[a].gf+=ag;h2h[a].ga+=hg;if(hg>ag)h2h[h].pts+=3;else if(hg<ag)h2h[a].pts+=3;else{h2h[h].pts++;h2h[a].pts++}}}Object.values(h2h).forEach(x=>x.gd=x.gf-x.ga);tied.sort((a,b)=>{const ha=h2h[a.team],hb=h2h[b.team];return (hb.pts-ha.pts)||(hb.gd-ha.gd)||(hb.gf-ha.gf)||(b.gd-a.gd)||(b.gf-a.gf)||((b.conduct??0)-(a.conduct??0))||((a.fifa??999)-(b.fifa??999))});ranked.push(...tied)}return ranked}
+function thirdCompare(a,b){return (b.pts-a.pts)||(b.gd-a.gd)||(b.gf-a.gf)||((b.conduct??0)-(a.conduct??0))||((a.fifa??999)-(b.fifa??999))}
+function allThirds(){const thirds=[...baseThird];for(const key of ['J','K','L']){const t=rankGroup(key)[2];thirds.push({...t,fixed:false,note:'Pending'})}return thirds.sort(thirdCompare)}
+function groupPositions(key){if(fixedGroupPositions[key])return fixedGroupPositions[key];const r=rankGroup(key);return {winner:r[0].team,runner:r[1].team,third:r[2].team}}
+function topThirds(){return allThirds().slice(0,8)}
+function thirdByGroup(){const map={};for(const t of allThirds())map[t.group]=t;return map}
+function allocationForCurrent(){const letters=topThirds().map(t=>t.group).sort().join('');const row=allocationRows[letters];const bySlot={};if(row){slotOrder.forEach((s,i)=>bySlot[s]=row[i])}return {letters,row,bySlot}}
+function compareToKorea(team){const korea=baseThird.find(x=>x.team==='South Korea');const pair=[team,korea].sort(thirdCompare);if(team.team==='South Korea')return 0;return pair[0].team===team.team?1:-1}
+function fmtGD(n){return n>0?'+'+n:String(n)}
+function fmtThird(slot){if(!slot)return 'TBD';const group=slot.replace('3','');const t=thirdByGroup()[group];return t?`${t.team} <span class="muted">(${slot})</span>`:slot}
+function textThird(slot){if(!slot)return 'TBD';const group=slot.replace('3','');const t=thirdByGroup()[group];return t?t.team:slot}
+function statusBadge(t,rank){if(t.note==='Qualified')return '<span class="badge b-good">Qualified</span>';if(t.note==='Eliminated')return '<span class="badge b-bad">Eliminated</span>';if(rank<=8)return '<span class="badge b-blue">Above cut</span>';return '<span class="badge b-watch">Below cut</span>'}
+function fixtureHTML(home,away){const korea=(home==='South Korea'||away==='South Korea');return `<span class="fixture ${korea?'status-good':''}">${home}</span><span class="vs">vs</span><span class="fixture ${korea?'status-good':''}">${away}</span>`}
+function makeFixture(match,time,venue,home,away,path){return {match,time,venue,home,away,path:path||r16Map[match]}}
+function roundOf32Fixtures(){const alloc=allocationForCurrent().bySlot;const J=groupPositions('J'),K=groupPositions('K'),L=groupPositions('L');return [
+  makeFixture(73,'29 Jun, 2:00 AM','Los Angeles',fixedGroupPositions.A.runner,fixedGroupPositions.B.runner),
+  makeFixture(76,'30 Jun, 12:00 AM','Houston',fixedGroupPositions.C.winner,fixedGroupPositions.F.runner),
+  makeFixture(74,'30 Jun, 3:30 AM','Boston',fixedGroupPositions.E.winner,textThird(alloc['1E'])||'3A/B/C/D/F'),
+  makeFixture(75,'30 Jun, 8:00 AM','Monterrey',fixedGroupPositions.F.winner,fixedGroupPositions.C.runner),
+  makeFixture(78,'1 Jul, 12:00 AM','Dallas',fixedGroupPositions.E.runner,fixedGroupPositions.I.runner),
+  makeFixture(77,'1 Jul, 4:00 AM','New York / New Jersey',fixedGroupPositions.I.winner,textThird(alloc['1I'])||'3C/D/F/G/H'),
+  makeFixture(79,'1 Jul, 8:00 AM','Mexico City',fixedGroupPositions.A.winner,textThird(alloc['1A'])||'3C/E/F/H/I'),
+  makeFixture(80,'1 Jul, 11:00 PM','Atlanta',L.winner,textThird(alloc['1L'])||'3E/H/I/J/K'),
+  makeFixture(82,'2 Jul, 3:00 AM','Seattle',fixedGroupPositions.G.winner,textThird(alloc['1G'])||'3A/E/H/I/J'),
+  makeFixture(81,'2 Jul, 7:00 AM','San Francisco Bay Area',fixedGroupPositions.D.winner,textThird(alloc['1D'])||'3B/E/F/I/J'),
+  makeFixture(84,'3 Jul, 2:00 AM','Los Angeles',fixedGroupPositions.H.winner,J.runner),
+  makeFixture(83,'3 Jul, 6:00 AM','Toronto',K.runner,L.runner),
+  makeFixture(85,'3 Jul, 10:00 AM','Vancouver',fixedGroupPositions.B.winner,textThird(alloc['1B'])||'3E/F/G/I/J'),
+  makeFixture(88,'4 Jul, 1:00 AM','Dallas',fixedGroupPositions.D.runner,fixedGroupPositions.G.runner),
+  makeFixture(86,'4 Jul, 5:00 AM','Miami',fixedGroupPositions.J?.winner||J.winner,fixedGroupPositions.H.runner),
+  makeFixture(87,'4 Jul, 8:30 AM','Kansas City',K.winner,textThird(alloc['1K'])||'3D/E/I/J/L')
+].sort((a,b)=>a.match-b.match)}
+function renderTable(){const tbody=document.querySelector('#thirdTable tbody');tbody.innerHTML='';const arr=allThirds();arr.forEach((t,idx)=>{const rank=idx+1;const tr=document.createElement('tr');tr.className=(rank<=8?'top8':'out')+(t.team==='South Korea'?' korea':'')+(rank===8?' cutline':'');tr.innerHTML=`<td class="num">${rank}</td><td>${t.group}</td><td><strong>${t.team}</strong></td><td class="num">${t.pts}</td><td class="num">${fmtGD(t.gd)}</td><td class="num">${t.gf}</td><td class="num">${t.ga}</td><td>${statusBadge(t,rank)}</td>`;tbody.appendChild(tr)});const kr=arr.findIndex(x=>x.team==='South Korea')+1,korea=arr.find(x=>x.team==='South Korea'),cut=arr[7],out=arr[8];document.getElementById('koreaStatus').innerHTML=kr<=8?'<span class="status-good">IN</span>':'<span class="status-bad">OUT</span>';document.getElementById('koreaDetail').textContent=`Rank ${kr} of 12 — ${korea.pts} pts, ${fmtGD(korea.gd)} GD, ${korea.gf} GF.`;document.getElementById('cutoffValue').textContent=`${cut.pts} pts / ${fmtGD(cut.gd)} GD`;document.getElementById('cutoffDetail').textContent=`8th: ${cut.team}. First out: ${out?out.team+' — '+out.pts+' pts / '+fmtGD(out.gd)+' GD':'none'}.`}
+function matchCard(m, context=false){
+  const s=scores[m.id]||{};
+  const div=document.createElement('div');
+  div.className='match';
+  div.innerHTML=`<div class="matchTop"><div><div class="matchTitle">Group ${m.group}: ${m.home} vs ${m.away}</div><div class="matchMeta">${m.time} · ${context?'Context only for full R32 bracket':'Korea needs: '+m.koreaNeed}</div></div>${context?'<span class="badge b-blue">Context</span>':'<span class="badge b-watch">Key</span>'}</div><div class="scoreLine"><div class="team">${m.home}</div><input type="number" min="0" id="${m.id}_hg" placeholder="—" value="${Number.isInteger(s.hg)?s.hg:''}"><input type="number" min="0" id="${m.id}_ag" placeholder="—" value="${Number.isInteger(s.ag)?s.ag:''}"><div class="team">${m.away}</div></div>`;
+  return div;
+}
+function renderMatches(){
+  const box=document.getElementById('matches');
+  box.innerHTML='';
+  const context=[];
+  for(const key of ['L','K','J']){
+    for(const m of groups[key].remaining){
+      if(m.important) box.appendChild(matchCard(m,false));
+      else context.push(m);
+    }
+  }
+  const details=document.createElement('details');
+  details.className='contextDetails';
+  details.innerHTML='<summary>Optional context scores for full Round of 32 bracket</summary>';
+  for(const m of context) details.appendChild(matchCard(m,true));
+  box.appendChild(details);
+}
+function renderPaths(){const box=document.getElementById('pathCards');box.innerHTML='';const korea=baseThird.find(x=>x.team==='South Korea');for(const key of ['L','K','J']){const third=rankGroup(key)[2],isAbove=compareToKorea(third)===1,keyMatchIds={L:'L2',K:'K2',J:'J1'},entered=!!scores[keyMatchIds[key]];let badgeClass='b-watch',badgeText='Pending';if(entered){badgeClass=isAbove?'b-bad':'b-good';badgeText=isAbove?'Bad for Korea':'Good for Korea'}const msg=isAbove?`${third.team} currently ranks above Korea as Group ${key}'s third-place team: ${third.pts} pts, ${fmtGD(third.gd)} GD, ${third.gf} GF.`:`${third.team} currently ranks below Korea as Group ${key}'s third-place team: ${third.pts} pts, ${fmtGD(third.gd)} GD, ${third.gf} GF.`;const div=document.createElement('div');div.className='path';div.innerHTML=`<h3>Group ${key} <span class="badge ${badgeClass}">${badgeText}</span></h3><p>${msg}</p><p class="mini" style="margin-top:6px">Current group third: ${third.team}. Korea: ${korea.pts} pts, ${fmtGD(korea.gd)} GD, ${korea.gf} GF.</p>`;box.appendChild(div)}}
+function bubbleNote(t, rank){
+  if(t.note==='Qualified') return 'Already treated as through.';
+  if(t.note==='Eliminated') return 'Eliminated from the best-third race.';
+  if(t.team==='Iran') return 'Currently safer than Korea, but still waiting. Iran mainly need at least one of Groups J/K/L not to pass them.';
+  if(t.team==='South Korea') return 'Need 2 of 3: Ghana beat Croatia; DR Congo fail to beat Uzbekistan; Austria beat Algeria.';
+  if(t.team==='Scotland') return 'Need maximum help from all three remaining groups, likely including goal-difference margins.';
+  if(t.group==='L') return 'Group L third-place lever: Ghana win helps Korea; Croatia draw/win hurts Korea.';
+  if(t.group==='K') return 'Group K lever: DR Congo win hurts Korea; draw or Uzbekistan normal win helps Korea.';
+  if(t.group==='J') return 'Group J lever: Austria win helps Korea; draw hurts Korea; Algeria win creates an Austria third-place scenario.';
+  return rank<=8 ? 'Currently above the cut line.' : 'Currently below the cut line.';
+}
+function bubbleBadge(t, rank){
+  if(t.note==='Qualified') return '<span class="badge b-good">Locked</span>';
+  if(t.note==='Eliminated') return '<span class="badge b-bad">Out</span>';
+  if(rank<=8) return '<span class="badge b-blue">Currently in</span>';
+  return '<span class="badge b-watch">Needs help</span>';
+}
+function renderBubbleWatch(){
+  const tbody=document.querySelector('#bubbleTable tbody');
+  if(!tbody) return;
+  tbody.innerHTML='';
+  const arr=allThirds();
+  const focus=arr.map((t,i)=>({...t,rank:i+1})).filter(t=>
+    t.team==='Iran'||t.team==='South Korea'||t.team==='Scotland'||t.team==='Uruguay'||['J','K','L'].includes(t.group)
+  );
+  for(const t of focus){
+    const tr=document.createElement('tr');
+    tr.className=(t.rank<=8?'top8':'out')+(t.team==='South Korea'?' korea':'')+(t.rank===8?' cutline':'');
+    tr.innerHTML=`<td class="num">${t.rank}</td><td>${t.group}</td><td><strong>${t.team}</strong></td><td class="num">${t.pts}</td><td class="num">${fmtGD(t.gd)}</td><td class="num">${t.gf}</td><td>${bubbleBadge(t,t.rank)}</td><td>${bubbleNote(t,t.rank)}</td>`;
+    tbody.appendChild(tr);
+  }
+}
+const bracketQuarters=[
+  {title:'Bracket quadrant 1', qf:'QF path: Winner of R16 M73/M75 vs Winner of R16 M74/M77', lanes:[{name:'R16: Winner M73 vs Winner M75',matches:[73,75]},{name:'R16: Winner M74 vs Winner M77',matches:[74,77]}]},
+  {title:'Bracket quadrant 2', qf:'QF path: Winner of R16 M76/M78 vs Winner of R16 M79/M80', lanes:[{name:'R16: Winner M76 vs Winner M78',matches:[76,78]},{name:'R16: Winner M79 vs Winner M80',matches:[79,80]}]},
+  {title:'Bracket quadrant 3', qf:'QF path: Winner of R16 M81/M82 vs Winner of R16 M83/M84', lanes:[{name:'R16: Winner M81 vs Winner M82',matches:[81,82]},{name:'R16: Winner M83 vs Winner M84',matches:[83,84]}]},
+  {title:'Bracket quadrant 4', qf:'QF path: Winner of R16 M85/M87 vs Winner of R16 M86/M88', lanes:[{name:'R16: Winner M85 vs Winner M87',matches:[85,87]},{name:'R16: Winner M86 vs Winner M88',matches:[86,88]}]}
+];
+function bracketMatchBox(f){
+  const hasK=f.home==='South Korea'||f.away==='South Korea';
+  return `<div class="bracketMatch ${hasK?'koreaBox':''}"><div class="bracketMeta">M${f.match} · ${f.time}</div><div class="bracketFixture">${fixtureHTML(f.home,f.away)}</div><div class="bracketVenue">${f.venue}</div></div>`;
+}
+function renderBracket(){
+  const box=document.getElementById('bracketView');
+  if(!box)return;
+  const fixtures=roundOf32Fixtures();
+  const byMatch={};
+  fixtures.forEach(f=>byMatch[f.match]=f);
+  let html='<div class="bracketGrid">';
+  for(const q of bracketQuarters){
+    let qHasK=false;
+    let lanes='';
+    for(const lane of q.lanes){
+      const laneFixtures=lane.matches.map(m=>byMatch[m]).filter(Boolean);
+      const laneHasK=laneFixtures.some(f=>f.home==='South Korea'||f.away==='South Korea');
+      qHasK = qHasK || laneHasK;
+      lanes += `<div class="r16Lane"><div class="r32Stack">${laneFixtures.map(bracketMatchBox).join('')}</div><div class="connector">→</div><div class="r16Box ${laneHasK?'koreaPath':''}"><div class="bracketSmall">Round of 16</div><strong>${lane.name}</strong></div></div>`;
+    }
+    html += `<div class="bracketRegion"><h3>${q.title}${qHasK?' <span class="badge b-blue">Korea path</span>':''}</h3>${lanes}<div class="qfBox ${qHasK?'koreaPath':''}"><div class="bracketSmall">Quarter-final path</div><strong>${q.qf}</strong></div></div>`;
+  }
+  html += '</div>';
+  box.innerHTML=html;
+}
+function renderRoundOf32(){const tbody=document.querySelector('#r32Table tbody');tbody.innerHTML='';const fixtures=roundOf32Fixtures();let koreaFixture=null;for(const f of fixtures){const tr=document.createElement('tr');const hasK=f.home==='South Korea'||f.away==='South Korea';if(hasK){tr.className='koreaFixture';koreaFixture=f}tr.innerHTML=`<td class="num"><strong>${f.match}</strong></td><td>${f.time}</td><td>${fixtureHTML(f.home,f.away)}</td><td>${f.venue}</td><td class="r16">${f.path}</td>`;tbody.appendChild(tr)}const alloc=allocationForCurrent();const qualified=topThirds().map(t=>`${t.group}:${t.team}`).join(' · ');document.getElementById('thirdComboNote').innerHTML=`Current advancing third-place groups: <strong>${alloc.letters.split('').join(', ')}</strong>. ${alloc.row?'Exact third-place allocation resolved from FIFA Annex C table for this combination.':'No exact allocation row loaded for this unusual combination; third-place opponent slots are shown as placeholders.'}<br>${qualified}`;if(koreaFixture){document.getElementById('koreaR32').innerHTML=`M${koreaFixture.match}: ${koreaFixture.home} vs ${koreaFixture.away}`;document.getElementById('koreaR32Detail').textContent=`${koreaFixture.time}, ${koreaFixture.venue}. Next path: ${koreaFixture.path}.`}else{const inTop=topThirds().some(t=>t.team==='South Korea');document.getElementById('koreaR32').innerHTML=inTop?'<span class="status-watch">TBD</span>':'<span class="status-bad">No matchup</span>';document.getElementById('koreaR32Detail').textContent=inTop?'Korea is in the top 8, but the exact allocation row is not loaded for this edge case.':'Korea is outside the current top 8 third-place teams.'}}
+function saveAndRecalc(){const next={};for(const key of ['L','K','J'])for(const m of groups[key].remaining){const hg=document.getElementById(`${m.id}_hg`).value,ag=document.getElementById(`${m.id}_ag`).value;if(hg!==''&&ag!=='')next[m.id]={hg:parseInt(hg,10),ag:parseInt(ag,10)}}scores=next;localStorage.setItem('koreaDashboardScores_v2',JSON.stringify(scores));recalc()}
+function resetScores(){if(confirm('Clear entered scores?')){scores={};localStorage.removeItem('koreaDashboardScores_v2');recalc()}}
+function recalc(){renderMatches();renderTable();renderBubbleWatch();renderPaths();renderRoundOf32();renderBracket();document.getElementById('lastUpdated').textContent=new Date().toLocaleString()}
+recalc();
+</script>
+</body>
+</html>
